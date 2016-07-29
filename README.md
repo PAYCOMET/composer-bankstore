@@ -1,5 +1,5 @@
 API de PAYTPV BankStore PHP
-=====================
+===========================
 
 Este es el API de conexión con todos los servicios de PAYTPV BankStore mediante XML, IFRAME, FULLSCREEN y JET.
 
