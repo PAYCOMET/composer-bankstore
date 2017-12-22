@@ -247,7 +247,7 @@ class Client
     * @version 2.0 2016-06-07
     */
 
-    public function CreateSubscription($pan, $expdate, $cvv, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $ownerName = null, $scoring = null, $merchant_data = null, $merchant_data)
+    public function CreateSubscription($pan, $expdate, $cvv, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $ownerName = null, $scoring = null, $merchant_data = null)
     {
         $pan = preg_replace('/\s+/', '', $pan);
         $expdate = preg_replace('/\s+/', '', $expdate);
@@ -257,7 +257,7 @@ class Client
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
-            $ans = $clientSOAP->create_subscription($this->merchantCode, $this->terminal, $pan, $expdate, $cvv, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $signature, $ip, 1, $ownerName, $scoring);
+            $ans = $clientSOAP->create_subscription($this->merchantCode, $this->terminal, $pan, $expdate, $cvv, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $signature, $ip, 1, $ownerName, $scoring, $merchant_data);
         } catch(SoapFault $e){
             return $this->SendResponse();
         }
