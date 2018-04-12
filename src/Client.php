@@ -17,7 +17,7 @@ use stdClass;
  * bundled with this package in the LICENSE file.
  *
  * @package    PAYTPV
- * @version    1.1.4
+ * @version    1.2
  * @author     PAYTPV
  * @license    BSD License (3-clause)
  * @copyright  (c) 2010-2017, PAYTPV
@@ -523,6 +523,30 @@ class Client
         try{
             $clientSOAP = new SoapClient($this->endpoint);
             $ans = $clientSOAP->add_user_token($this->merchantCode, $this->terminal, $jettoken, $this->jetid, $signature, $ip);
+        } catch(SoapFault $e){
+            return $this->SendResponse();
+        }
+
+        return $this->SendResponse($ans);
+    }
+
+
+    /**
+     * Actualiza la fecha de caducidad de un usuario dado de alta en el sistema.
+     *
+     * @param integer $idUser Identificador del usuario en PAYTPV.
+     * @param string $tokenUser Token del usuario en PAYTPV.
+     * @param string $expiryDate Nueva fecha de caducidad de la tarjeta, expresada como “mmyy” (mes en dos cifras y año en dos cifras).
+     * @return object Objeto de respuesta de la operación
+     * @version 1.2 20180411
+     */
+    public function UpdateExpiryDate($idUser, $tokenUser, $expiryDate)
+    {
+        $signature = hash('sha256', $this->merchantCode . $this->terminal . $idUser . $tokenUser . $expiryDate . $this->password);
+
+        try{
+            $clientSOAP = new SoapClient($this->endpoint);
+            $ans = $clientSOAP->update_expiry_date($this->merchantCode, $this->terminal, $idUser, $tokenUser, $expiryDate, $signature);
         } catch(SoapFault $e){
             return $this->SendResponse();
         }
