@@ -9,7 +9,7 @@
     }
   ],
   "license": [
-    "Licensed under the 3-clause BSD License."
+    "BSD-3-Clause"
   ],
   "autoload": {
     "psr-4": {
