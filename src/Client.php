@@ -17,7 +17,7 @@ use stdClass;
  * bundled with this package in the LICENSE file.
  *
  * @package    PAYTPV
- * @version    1.2.1
+ * @version    1.2.2
  * @author     PAYTPV
  * @license    BSD License (3-clause)
  * @copyright  (c) 2010-2017, PAYTPV
@@ -697,7 +697,7 @@ class Client
     * @version 1.1 2017-11-23 Añadimos parámetros urlOk y urlKo
     */
 
-    public function AddUserUrl($transreference, $lang = "ES", $urlOk = null, $urlKo = null)
+    public function AddUserUrl($transreference, $lang = "ES", $urlOk = null, $urlKo = null, $secure3d = false)
     {
         $pretest = array();
 
@@ -712,6 +712,9 @@ class Client
 
         if ($urlKo) {
             $operation->UrlKo = $urlKo;
+        }
+        if ($secure3d != false) {
+            $operation->Secure3D = $secure3d;
         }
 
         $operation->Hash = $this->GenerateHash($operation, $operation->Type);
