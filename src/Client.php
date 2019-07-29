@@ -1,13 +1,13 @@
 <?php
 
-namespace Paytpv\Bankstore;
+namespace Paycomet\Bankstore;
 
 use SoapClient;
 use SoapFault;
 use stdClass;
 
 /**
- * API de PAYTPV para PHP. Métodos BankStore IFRAME/FULLSCREEN/XML/JET
+ * API de PAYCOMET para PHP. Métodos BankStore IFRAME/FULLSCREEN/XML/JET
  *
  * NOTICE OF LICENSE
  *
@@ -16,12 +16,12 @@ use stdClass;
  * This source file is subject to the 3-clause BSD License that is
  * bundled with this package in the LICENSE file.
  *
- * @package    PAYTPV
+ * @package    PAYCOMET
  * @version    1.2.2
- * @author     PAYTPV
+ * @author     PAYCOMET
  * @license    BSD License (3-clause)
- * @copyright  (c) 2010-2017, PAYTPV
- * @link       https://www.paytpv.com
+ * @copyright  (c) 2010-2019, PAYCOMET
+ * @link       https://www.paycomet.com
  */
 
 class Client
@@ -39,8 +39,8 @@ class Client
         $this->terminal = $arg2;
         $this->password = $arg3;
         $this->jetid = $arg4;
-        $this->endpoint = 'https://secure.paytpv.com/gateway/xml-bankstore?wsdl';
-        $this->endpointurl = 'https://secure.paytpv.com/gateway/ifr-bankstore?';
+        $this->endpoint = 'https://api.paycomet.com/gateway/xml-bankstore?wsdl';
+        $this->endpointurl = 'https://api.paycomet.com/gateway/ifr-bankstore?';
     }
 
     /**
@@ -48,7 +48,7 @@ class Client
     */
 
     /**
-    * Añade una tarjeta a PAYTPV. ¡¡¡ IMPORTANTE !!! Esta entrada directa debe ser activada por PAYTPV.
+    * Añade una tarjeta a PAYCOMET. ¡¡¡ IMPORTANTE !!! Esta entrada directa debe ser activada por PAYCOMET.
     * En su defecto el método de entrada de tarjeta para el cumplimiento del PCI-DSS debe ser AddUserUrl o AddUserToken (método utilizado por BankStore JET)
     * @param int $pan Número de tarjeta, sin espacios ni guiones
     * @param string $expdate Fecha de caducidad de la tarjeta, expresada como “mmyy” (mes en dos cifras y año en dos cifras)
@@ -76,9 +76,9 @@ class Client
     }
 
     /**
-    * Elimina un usuario de PAYTPV mediante llamada soap
-    * @param int $idpayuser Id de usuario en PAYTPV
-    * @param string $tokenpayuser Token de usuario en PAYTPV
+    * Elimina un usuario de PAYCOMET mediante llamada soap
+    * @param int $idpayuser Id de usuario en PAYCOMET
+    * @param string $tokenpayuser Token de usuario en PAYCOMET
     * @return object Objeto de respuesta de la operación
     * @version 1.0 2016-06-02
     */
@@ -99,9 +99,9 @@ class Client
     }
 
     /**
-    * Devuelve la información de un usuario almacenada en PAYTPV mediante llamada soap
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * Devuelve la información de un usuario almacenada en PAYCOMET mediante llamada soap
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @return object Objeto de respuesta de la operación
     * @version 1.0 2016-06-02
     */
@@ -122,8 +122,8 @@ class Client
 
     /**
     * Ejecuta un pago por web service
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @param string $currency Identificador de la moneda de la operación
@@ -153,8 +153,8 @@ class Client
 
     /**
     * Ejecuta un pago por web service con la operativa DCC
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @param string $productdescription Descripción del producto
@@ -181,7 +181,7 @@ class Client
     /**
     * Confirma un pago por web service con la operativa DCC
     * @param string $transreference Identificador único del pago
-    * @param string $dcccurrency Moneda de la transacción elegida. Puede ser la del producto PAYTPV o la nativa seleccionada por el usuario final. El importe será el enviado en execute_purchase_dcc si es el mismo del producto y el convertido en caso de ser diferente.
+    * @param string $dcccurrency Moneda de la transacción elegida. Puede ser la del producto PAYCOMET o la nativa seleccionada por el usuario final. El importe será el enviado en execute_purchase_dcc si es el mismo del producto y el convertido en caso de ser diferente.
     * @param string $dccsession Misma sesión enviada en el proceso de execute_purchase_dcc.
     * @return object Objeto de respuesta de la operación
     * @version 1.0 2016-06-07
@@ -203,8 +203,8 @@ class Client
 
     /**
     * Ejecuta una devolución de un pago por web service
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $transreference Identificador único del pago
     * @param string $currency Identificador de la moneda de la operación
     * @param string $authcode AuthCode de la operación original a devolver
@@ -229,7 +229,7 @@ class Client
     }
 
     /**
-    * Crea una suscripción en PAYTPV sobre una tarjeta. ¡¡¡ IMPORTANTE !!! Esta entrada directa debe ser activada por PAYTPV.
+    * Crea una suscripción en PAYCOMET sobre una tarjeta. ¡¡¡ IMPORTANTE !!! Esta entrada directa debe ser activada por PAYCOMET.
     * En su defecto el método de entrada de tarjeta para el cumplimiento del PCI-DSS debe ser CreateSubscriptionUrl o CreateSubscriptionToken
     * @param int $pan Número de tarjeta, sin espacios ni guiones
     * @param string $expdate Fecha de caducidad de la tarjeta, expresada como “mmyy” (mes en dos cifras y año en dos cifras)
@@ -266,7 +266,7 @@ class Client
     }
 
     /**
-    * Modifica una suscripción en PAYTPV sobre una tarjeta.
+    * Modifica una suscripción en PAYCOMET sobre una tarjeta.
     * @param string $idpayuser Identificador único del usuario registrado en el sistema.
     * @param string $tokenpayuser Código token asociado al IDUSER.
     * @param string $startdate Fecha de inicio de la suscripción yyyy-mm-dd
@@ -294,7 +294,7 @@ class Client
     }
 
     /**
-    * Elimina una suscripción en PAYTPV sobre una tarjeta.
+    * Elimina una suscripción en PAYCOMET sobre una tarjeta.
     * @param string $idpayuser Identificador único del usuario registrado en el sistema.
     * @param string $tokenpayuser Código token asociado al IDUSER.
     * @return object Objeto de respuesta de la operación
@@ -317,7 +317,7 @@ class Client
     }
 
     /**
-    * Crea una suscripción en PAYTPV sobre una tarjeta tokenizada previamente.
+    * Crea una suscripción en PAYCOMET sobre una tarjeta tokenizada previamente.
     * @param string $idpayuser Identificador único del usuario registrado en el sistema.
     * @param string $tokenpayuser Código token asociado al IDUSER.
     * @param string $startdate Fecha de inicio de la suscripción yyyy-mm-dd
@@ -349,8 +349,8 @@ class Client
 
     /**
     * Crea una preautorización por web service
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @param string $currency Identificador de la moneda de la operación
@@ -380,8 +380,8 @@ class Client
 
     /**
     * Confirma una preautorización por web service previamente enviada
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @return object Objeto de respuesta de la operación
@@ -405,8 +405,8 @@ class Client
 
     /**
     * Cancela una preautorización por web service previamente enviada
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @return object Objeto de respuesta de la operación
@@ -430,8 +430,8 @@ class Client
 
     /**
     * Confirma una preautorización diferida por web service. Una vez realizada y autorizada una operación de preautorización diferida, puede confirmarse para realizar el cobro efectivo dentro de las 72 horas siguientes; pasada esa fecha, las preautorizaciones diferidas pierden su validez.
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @return object Objeto de respuesta de la operación
@@ -455,8 +455,8 @@ class Client
 
     /**
     * Cancela una preautorización diferida por web service.
-    * @param int $idpayuser Id del usuario en PAYTPV
-    * @param string $tokenpayuser Token del usuario en PAYTPV
+    * @param int $idpayuser Id del usuario en PAYCOMET
+    * @param string $tokenpayuser Token del usuario en PAYCOMET
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @return object Objeto de respuesta de la operación
@@ -479,7 +479,7 @@ class Client
     }
 
     /**
-    * Ejecuta un pago por web service con el "pago por referencia" de cara a la migración de sistemas a PAYTPV.
+    * Ejecuta un pago por web service con el "pago por referencia" de cara a la migración de sistemas a PAYCOMET.
     * @param string $amount Importe del pago 1€ = 100
     * @param string $transreference Identificador único del pago
     * @param string $rtoken Referencia original de la tarjeta almacenada en sistema antiguo.
@@ -510,7 +510,7 @@ class Client
 
     /**
     * Añade un usuario por BankStore JET mediante web service
-    * @param int $jettoken Token temporal del usuario en PAYTPV
+    * @param int $jettoken Token temporal del usuario en PAYCOMET
     * @return object Objeto de respuesta de la operación
     * @version 1.0 2016-06-02
     */
@@ -534,8 +534,8 @@ class Client
     /**
      * Actualiza la fecha de caducidad de un usuario dado de alta en el sistema.
      *
-     * @param integer $idUser Identificador del usuario en PAYTPV.
-     * @param string $tokenUser Token del usuario en PAYTPV.
+     * @param integer $idUser Identificador del usuario en PAYCOMET.
+     * @param string $tokenUser Token del usuario en PAYCOMET.
      * @param string $expiryDate Nueva fecha de caducidad de la tarjeta, expresada como “mmyy” (mes en dos cifras y año en dos cifras).
      * @param string optional $cvv2 Nuevo código de seguridad de la tarjeta.
      * @return object Objeto de respuesta de la operación
@@ -1268,7 +1268,7 @@ class Client
     }
 
     /**
-    * Crea una respuesta del servicio PAYTPV BankStore en objeto
+    * Crea una respuesta del servicio PAYCOMET BankStore en objeto
     * @param array $respuesta Array de la respuesta a ser convertida a objeto
     * @return object Objeto de respuesta. Se incluye el valor RESULT (OK para correcto y KO incorrecto)
     * @version 1.0 2016-06-03
@@ -1474,7 +1474,7 @@ class Client
 
     /**
     * Comprueba si la URL generada con la operativa deseada genera un error
-    * @param string $peticion La URL con la petición a PAYTPV.
+    * @param string $peticion La URL con la petición a PAYCOMET.
     * @return array $response Array con la respuesta. Si hay un error devuelve el error que ha generado, si es OK el value DS_ERROR_ID irá a 0.
     * @version 1.0 2016-06-06
     */
