@@ -17,7 +17,7 @@ use stdClass;
  * bundled with this package in the LICENSE file.
  *
  * @package    PAYCOMET
- * @version    1.2.2
+ * @version    2.0.2
  * @author     PAYCOMET
  * @license    BSD License (3-clause)
  * @copyright  (c) 2010-2019, PAYCOMET
@@ -63,7 +63,7 @@ class Client
         $expdate = preg_replace('/\s+/', '', $expdate);
         $cvv = preg_replace('/\s+/', '', $cvv);
         $signature = sha1($this->merchantCode.$pan.$cvv.$this->terminal.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -86,7 +86,7 @@ class Client
     {
 
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try {
             $clientSOAP = new SoapClient($this->endpoint);
@@ -108,7 +108,7 @@ class Client
     public function InfoUser($idpayuser, $tokenpayuser)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -139,7 +139,7 @@ class Client
     public function ExecutePurchase($idpayuser, $tokenpayuser, $amount, $transreference, $currency, $productdescription, $owner, $scoring = null, $merchant_data = null, $merchant_description = null)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -166,7 +166,7 @@ class Client
     public function ExecutePurchaseDcc($idpayuser, $tokenpayuser, $amount, $transreference, $productdescription = false, $owner = false, $merchant_description = null)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -216,7 +216,7 @@ class Client
     public function ExecuteRefund($idpayuser, $tokenpayuser, $transreference, $currency, $authcode, $amount = NULL, $merchant_description = NULL)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$authcode.$transreference.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -253,7 +253,7 @@ class Client
         $expdate = preg_replace('/\s+/', '', $expdate);
         $cvv = preg_replace('/\s+/', '', $cvv);
         $signature = sha1($this->merchantCode.$pan.$cvv.$this->terminal.$amount.$currency.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -281,7 +281,7 @@ class Client
     public function EditSubscription($idpayuser, $tokenpayuser, $startdate, $enddate, $periodicity, $amount, $execute)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -304,7 +304,7 @@ class Client
     public function RemoveSubscription($idpayuser, $tokenpayuser)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -335,7 +335,7 @@ class Client
     public function CreateSubscriptionToken($idpayuser, $tokenpayuser, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $scoring = null, $merchant_data = null)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$currency.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -366,7 +366,7 @@ class Client
     public function CreatePreauthorization($idpayuser, $tokenpayuser, $amount, $transreference, $currency, $productdescription = false, $owner = false, $scoring = null, $merchant_data = null, $merchant_description = null)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -391,7 +391,7 @@ class Client
     public function PreauthorizationConfirm($idpayuser, $tokenpayuser, $amount, $transreference, $merchant_description = null)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -416,7 +416,7 @@ class Client
     public function PreauthorizationCancel($idpayuser, $tokenpayuser, $amount, $transreference)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -441,7 +441,7 @@ class Client
     public function DeferredPreauthorizationConfirm($idpayuser, $tokenpayuser, $amount, $transreference)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -466,7 +466,7 @@ class Client
     public function DeferredPreauthorizationCancel($idpayuser, $tokenpayuser, $amount, $transreference)
     {
         $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -518,7 +518,7 @@ class Client
     public function AddUserToken($jettoken)
     {
         $signature = sha1($this->merchantCode.$jettoken.$this->jetid.$this->terminal.$this->password);
-        $ip = $_SERVER['REMOTE_ADDR'];
+        $ip = $this->GetClientIp();
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -1504,5 +1504,32 @@ class Client
         }
 
         return $response;
+    }
+
+
+    /**
+     * Obtiene la ip del cliente que ha realizado la petición al servidor.
+     * @return string Debe de ser la ip del cliente. En su defecto, devuelve la ip del servidor.
+     * @version 1.3.0 2019-09-22
+     */
+    public function GetClientIp()
+    {
+        $ipAddress = '';
+        if (isset($_SERVER['REMOTE_ADDR'])) {
+            $ipAddress = $_SERVER['REMOTE_ADDR'];
+        } else if (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $ipAddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else if (isset($_SERVER['HTTP_X_FORWARDED'])) {
+            $ipAddress = $_SERVER['HTTP_X_FORWARDED'];
+        } else if (isset($_SERVER['HTTP_FORWARDED_FOR'])) {
+            $ipAddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        } else if (isset($_SERVER['HTTP_FORWARDED'])) {
+            $ipAddress = $_SERVER['HTTP_FORWARDED'];
+        } else if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+            $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
+        } else {
+            $ipAddress = $_SERVER['SERVER_ADDR'];  // Server IP por defecto
+        }
+        return $ipAddress;
     }
 }
