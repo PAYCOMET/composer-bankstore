@@ -62,7 +62,7 @@ class Client
         $pan = preg_replace('/\s+/', '', $pan);
         $expdate = preg_replace('/\s+/', '', $expdate);
         $cvv = preg_replace('/\s+/', '', $cvv);
-        $signature = sha1($this->merchantCode.$pan.$cvv.$this->terminal.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$pan.$cvv.$this->terminal.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -85,7 +85,7 @@ class Client
     public function RemoveUser($idpayuser, $tokenpayuser)
     {
 
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
         $ip = $this->GetClientIp();
 
         try {
@@ -107,7 +107,7 @@ class Client
     */
     public function InfoUser($idpayuser, $tokenpayuser)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -138,7 +138,7 @@ class Client
 
     public function ExecutePurchase($idpayuser, $tokenpayuser, $amount, $transreference, $currency, $productdescription, $owner, $scoring = null, $merchant_data = null, $merchant_description = null)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -165,7 +165,7 @@ class Client
 
     public function ExecutePurchaseDcc($idpayuser, $tokenpayuser, $amount, $transreference, $productdescription = false, $owner = false, $merchant_description = null)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -189,7 +189,7 @@ class Client
 
     public function ConfirmPurchaseDcc($transreference, $dcccurrency, $dccsession)
     {
-        $signature = sha1($this->merchantCode.$this->terminal.$transreference.$dcccurrency.$dccsession.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$this->terminal.$transreference.$dcccurrency.$dccsession.$this->password);
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -215,7 +215,7 @@ class Client
 
     public function ExecuteRefund($idpayuser, $tokenpayuser, $transreference, $currency, $authcode, $amount = NULL, $merchant_description = NULL)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$authcode.$transreference.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$authcode.$transreference.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -252,7 +252,7 @@ class Client
         $pan = preg_replace('/\s+/', '', $pan);
         $expdate = preg_replace('/\s+/', '', $expdate);
         $cvv = preg_replace('/\s+/', '', $cvv);
-        $signature = sha1($this->merchantCode.$pan.$cvv.$this->terminal.$amount.$currency.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$pan.$cvv.$this->terminal.$amount.$currency.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -280,7 +280,7 @@ class Client
 
     public function EditSubscription($idpayuser, $tokenpayuser, $startdate, $enddate, $periodicity, $amount, $execute)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -303,7 +303,7 @@ class Client
 
     public function RemoveSubscription($idpayuser, $tokenpayuser)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -334,7 +334,7 @@ class Client
 
     public function CreateSubscriptionToken($idpayuser, $tokenpayuser, $startdate, $enddate, $transreference, $periodicity, $amount, $currency, $scoring = null, $merchant_data = null)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$currency.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$currency.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -365,7 +365,7 @@ class Client
 
     public function CreatePreauthorization($idpayuser, $tokenpayuser, $amount, $transreference, $currency, $productdescription = false, $owner = false, $scoring = null, $merchant_data = null, $merchant_description = null)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$amount.$transreference.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -390,7 +390,7 @@ class Client
 
     public function PreauthorizationConfirm($idpayuser, $tokenpayuser, $amount, $transreference, $merchant_description = null)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -415,7 +415,7 @@ class Client
 
     public function PreauthorizationCancel($idpayuser, $tokenpayuser, $amount, $transreference)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -440,7 +440,7 @@ class Client
 
     public function DeferredPreauthorizationConfirm($idpayuser, $tokenpayuser, $amount, $transreference)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -465,7 +465,7 @@ class Client
 
     public function DeferredPreauthorizationCancel($idpayuser, $tokenpayuser, $amount, $transreference)
     {
-        $signature = sha1($this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$idpayuser.$tokenpayuser.$this->terminal.$transreference.$amount.$this->password);
         $ip = $this->GetClientIp();
 
         try{
@@ -491,7 +491,7 @@ class Client
 
     public function ExecutePurchaseRToken($amount, $transreference, $rtoken, $currency, $productdescription = false, $merchant_description = null)
     {
-        $signature = sha1($this->merchantCode.$this->terminal.$amount.$transreference.$rtoken.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$this->terminal.$amount.$transreference.$rtoken.$this->password);
 
         try{
             $clientSOAP = new SoapClient($this->endpoint);
@@ -517,7 +517,7 @@ class Client
 
     public function AddUserToken($jettoken)
     {
-        $signature = sha1($this->merchantCode.$jettoken.$this->jetid.$this->terminal.$this->password);
+        $signature = hash('sha512',$this->merchantCode.$jettoken.$this->jetid.$this->terminal.$this->password);
         $ip = $this->GetClientIp();
 
         try{
