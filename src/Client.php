@@ -17,10 +17,7 @@ use stdClass;
  * bundled with this package in the LICENSE file.
  *
  * @package    PAYCOMET
- * @version    2.0.4
- * @author     PAYCOMET
- * @license    BSD License (3-clause)
- * @copyright  (c) 2010-2019, PAYCOMET
+ * @copyright  (c) 2020, PAYCOMET
  * @link       https://www.paycomet.com
  */
 
