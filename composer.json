@@ -1,7 +1,7 @@
 {
   "name": "paycomet/composer-bankstore",
   "description": "PHP Client Library for PAYCOMET Bankstore",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "authors": [
     {
       "name": "PAYCOMET",

@@ -1,7 +1,7 @@
 <?php
 
 /**
- * API REST de PAYCOMET para PHP. 
+ * API REST de PAYCOMET para PHP.
  *
  * NOTICE OF LICENSE
  *
@@ -10,7 +10,7 @@
  * This source file is subject to the 3-clause BSD License that is
  * bundled with this package in the LICENSE file.
  *
- * @package    PAYCOMET 
+ * @package    PAYCOMET
  * @copyright  (c) 2020, PAYCOMET
  * @link       https://www.paycomet.com
  */
@@ -37,12 +37,12 @@ class ApiRest
         $subscription = []
     ) {
         $params = [
-            "operationType" => (int) $operationType,
-            "language" => (string) $language,
-            "terminal" => (int) $terminal,
-            "productDescription" => (string) $productDescription,
-            "payment" => $payment,
-            "subscription" => $subscription
+            "operationType"         => (int) $operationType,
+            "language"              => (string) $language,
+            "terminal"              => (int) $terminal,
+            "productDescription"    => (string) $productDescription,
+            "payment"               => (array) $payment,
+            "subscription"          => (array) $subscription
         ];
 
         return $this->executeRequest('/v1/form', $params);
@@ -57,28 +57,28 @@ class ApiRest
         $notify = 1
     ) {
         $params = [
-            "terminal" => (int) $terminal,
-            "jetToken" => (string) $jetToken,
-            "order" => (string) $order,
-            "productDescription" => (string) $productDescription,
-            "language" => (string) $language,
-            "notify" => (string) $notify   
+            "terminal"              => (int) $terminal,
+            "jetToken"              => (string) $jetToken,
+            "order"                 => (string) $order,
+            "productDescription"    => (string) $productDescription,
+            "language"              => (string) $language,
+            "notify"                => (int) $notify
         ];
 
         return $this->executeRequest('/v1/cards', $params);
     }
-    
+
     public function infoUser(
         $idUser,
         $tokenUser,
         $terminal
     ) {
         $params = [
-            'idUser' => (int) $idUser,
-            'tokenUser' => (string) $tokenUser,
-            'terminal' => (string) $terminal,
+            'idUser'                => (int) $idUser,
+            'tokenUser'             => (string) $tokenUser,
+            'terminal'              => (string) $terminal,
         ];
-            
+
         return $this->executeRequest('/v1/cards/info', $params);
     }
 
@@ -88,11 +88,11 @@ class ApiRest
         $tokenUser
     ) {
         $params = [
-            'terminal' => (string) $terminal,
-            'idUser' => (int) $idUser,
-            'tokenUser' => (string) $tokenUser,
+            'terminal'              => (string) $terminal,
+            'idUser'                => (int) $idUser,
+            'tokenUser'             => (string) $tokenUser,
         ];
-            
+
         return $this->executeRequest('/v1/cards/delete', $params);
     }
 
@@ -119,25 +119,25 @@ class ApiRest
     ) {
         $params = [
             "payment" => [
-                'terminal' => (int) $terminal,
-                'order' => (string) $order,
-                'amount' => (string) $amount,
-                'currency' => (string) $currency,
-                'methodId' => (string) $methodId,
-                'originalIp' => (string) $originalIp,
-                'secure' => (string) $secure,
-                'idUser' => (int) $idUser,
-                'tokenUser' => (string) $tokenUser,
-                'scoring' => (string) $scoring,
-                'productDescription' => (string) $productDescription,
-                'merchantDescription' => (string) $merchantDescription,
-                'userInteraction' => (string) $userInteraction,
-                'escrowTargets' => $escrowTargets,
-                'trxType' => (string) $trxType,
-                'SCAException' => (string) $SCAException,
-                'urlOk' => (string) $urlOk,
-                'ulrKo' => (string) $ulrKo,
-                'merchantData' => $merchantData
+                'terminal'              => (int) $terminal,
+                'order'                 => (string) $order,
+                'amount'                => (string) $amount,
+                'currency'              => (string) $currency,
+                'methodId'              => (string) $methodId,
+                'originalIp'            => (string) $originalIp,
+                'secure'                => (int) $secure,
+                'idUser'                => (int) $idUser,
+                'tokenUser'             => (string) $tokenUser,
+                'scoring'               => (string) $scoring,
+                'productDescription'    => (string) $productDescription,
+                'merchantDescription'   => (string) $merchantDescription,
+                'userInteraction'       => (int) $userInteraction,
+                'escrowTargets'         => (array) $escrowTargets,
+                'trxType'               => (string) $trxType,
+                'SCAException'          => (string) $SCAException,
+                'urlOk'                 => (string) $urlOk,
+                'ulrKo'                 => (string) $ulrKo,
+                'merchantData'          => (array) $merchantData
             ]
         ];
 
@@ -169,28 +169,28 @@ class ApiRest
     ) {
         $params = [
             "payment" => [
-                'terminal' => (int) $terminal,
-                'order' => (string) $order,
-                'amount' => (string) $amount,
-                'currency' => (string) $currency,
-                'methodId' => (string) $methodId,
-                'originalIp' => (string) $originalIp,
-                'secure' => (string) $secure,
-                'idUser' => (int) $idUser,
-                'tokenUser' => (string) $tokenUser,
-                'scoring' => (string) $scoring,
-                'productDescription' => (string) $productDescription,
-                'merchantDescription' => (string) $merchantDescription,
-                'userInteraction' => (string) $userInteraction,
-                'escrowTargets' => $escrowTargets,
-                'trxType' => (string) $trxType,
-                'SCAException' => (string) $SCAException,
-                'urlOk' => (string) $urlOk,
-                'ulrKo' => (string) $ulrKo,
-                'merchantData' => $merchantData,
-                'deferred' => $deferred
+                'terminal'              => (int) $terminal,
+                'order'                 => (string) $order,
+                'amount'                => (string) $amount,
+                'currency'              => (string) $currency,
+                'methodId'              => (string) $methodId,
+                'originalIp'            => (string) $originalIp,
+                'secure'                => (int) $secure,
+                'idUser'                => (int) $idUser,
+                'tokenUser'             => (string) $tokenUser,
+                'scoring'               => (string) $scoring,
+                'productDescription'    => (string) $productDescription,
+                'merchantDescription'   => (string) $merchantDescription,
+                'userInteraction'       => (int) $userInteraction,
+                'escrowTargets'         => (array) $escrowTargets,
+                'trxType'               => (string) $trxType,
+                'SCAException'          => (string) $SCAException,
+                'urlOk'                 => (string) $urlOk,
+                'ulrKo'                 => (string) $ulrKo,
+                'merchantData'          => (array) $merchantData,
+                'deferred'              => (int) $deferred
             ]
-        ];        
+        ];
 
         return $this->executeRequest('/v1/payments/preauth', $params);
     }
@@ -198,7 +198,7 @@ class ApiRest
 
     public function confirmPreautorization(
         $order,
-        $terminal,        
+        $terminal,
         $amount,
         $originalIp,
         $authCode,
@@ -206,11 +206,11 @@ class ApiRest
     ) {
         $params = [
             "payment" => [
-                'terminal' => (int) $terminal,                
-                'amount' => (string) $amount,
-                'originalIp' => (string) $originalIp,
-                'authCode' => (string) $authCode,
-                'deferred' => $deferred
+                'terminal'      => (int) $terminal,
+                'amount'        => (string) $amount,
+                'originalIp'    => (string) $originalIp,
+                'authCode'      => (string) $authCode,
+                'deferred'      => (int) $deferred
             ]
         ];
 
@@ -243,32 +243,32 @@ class ApiRest
     ) {
         $params = [
             "subscription" => [
-                "startDate" => (string) $startDate,
-                "endDate" => (string) $endDate,
-                "periodicity" => (string) $periodicity,
+                "startDate"             => (string) $startDate,
+                "endDate"               => (string) $endDate,
+                "periodicity"           => (string) $periodicity,
             ],
             "payment" => [
-                "terminal" => (int) $terminal,
-                "methodId" => (string) $methodId,
-                "order" => (string) $order,
-                "amount" => (string) $amount,
-                "currency" => (string) $currency,
-                "originalIp" => (string) $originalIp,
-                "idUser" => (int) $idUser,
-                "tokenUser" => (string) $tokenUser,
-                "secure" => (string) $secure,
-                "scoring" => (string) $scoring,
-                "productDescription" => (string) $productDescription,
-                "merchantDescriptor" => (string) $merchantDescriptor,
-                "userInteraction" => (string) $userInteraction,
-                "escrowTargets" => $escrowTargets,
-                "trxType" => (string) $trxType,
-                "SCAException" => (string) $SCAException,
-                "urlOk" => (string) $urlOk,
-                "urlKo" => (string) $urlKo,
-                "merchantData" => $merchantData,
+                "terminal"              => (int) $terminal,
+                "methodId"              => (string) $methodId,
+                "order"                 => (string) $order,
+                "amount"                => (string) $amount,
+                "currency"              => (string) $currency,
+                "originalIp"            => (string) $originalIp,
+                "idUser"                => (int) $idUser,
+                "tokenUser"             => (string) $tokenUser,
+                "secure"                => (int) $secure,
+                "scoring"               => (string) $scoring,
+                "productDescription"    => (string) $productDescription,
+                "merchantDescriptor"    => (string) $merchantDescriptor,
+                "userInteraction"       => (int) $userInteraction,
+                "escrowTargets"         => (array)  $escrowTargets,
+                "trxType"               => (string) $trxType,
+                "SCAException"          => (string) $SCAException,
+                "urlOk"                 => (string) $urlOk,
+                "urlKo"                 => (string) $urlKo,
+                "merchantData"          => (array) $merchantData,
             ]
-        
+
         ];
 
         return $this->executeRequest('/v1/subscription', $params);
@@ -282,9 +282,9 @@ class ApiRest
     ) {
         $params = [
             "payment" => [
-                'terminal' => (int) $terminal,
-                'order' => (string) $order,
-                'idUser' => (int) $idUser,
+                'terminal'  => (int) $terminal,
+                'order'     => (string) $order,
+                'idUser'    => (int) $idUser,
                 'tokenUser' => (string) $tokenUser
             ]
         ];
@@ -302,13 +302,13 @@ class ApiRest
     ) {
         $params = [
             "payment" => [
-                'terminal' => (int) $terminal,
-                'amount' => (string) $amount,
-                'currency' => (string) $currency,
-                'authCode' => (string) $authCode,
-                'originalIp' => (string) $originalIp,
-                'tokenUser' => (string) $tokenUser = '',
-                'idUser' => (int) $idUser = ''
+                'terminal'      => (int) $terminal,
+                'amount'        => (string) $amount,
+                'currency'      => (string) $currency,
+                'authCode'      => (string) $authCode,
+                'originalIp'    => (string) $originalIp,
+                'tokenUser'     => (string) $tokenUser = '',
+                'idUser'        => (int) $idUser = ''
             ]
         ];
 
@@ -324,22 +324,22 @@ class ApiRest
         $url = $this->endpointUrl . $endpoint;
 
         curl_setopt_array($curl, array(
-                CURLOPT_URL => $url,
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_TIMEOUT => 0,
-                CURLOPT_FOLLOWLOCATION => true,
-                CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST => "POST",
-                CURLOPT_POSTFIELDS => $jsonParams,
-                CURLOPT_HTTPHEADER => array(
+                CURLOPT_URL                 => $url,
+                CURLOPT_RETURNTRANSFER      => true,
+                CURLOPT_MAXREDIRS           => 10,
+                CURLOPT_TIMEOUT             => 0,
+                CURLOPT_FOLLOWLOCATION      => true,
+                CURLOPT_HTTP_VERSION        => CURL_HTTP_VERSION_1_1,
+                CURLOPT_CUSTOMREQUEST       => "POST",
+                CURLOPT_POSTFIELDS          => $jsonParams,
+                CURLOPT_HTTPHEADER          => array(
                     "PAYCOMET-API-TOKEN: $this->apiKey",
                     "Content-Type: application/json"
-            ),
+                ),
         ));
-        
+
         $response = curl_exec($curl);
-        
+
         curl_close($curl);
 
         return json_decode($response);
