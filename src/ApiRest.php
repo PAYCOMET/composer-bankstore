@@ -107,7 +107,7 @@ class ApiRest
         $idUser = '',
         $tokenUser= '',
         $urlOk = '',
-        $ulrKo = '',
+        $urlKo = '',
         $scoring = '0',
         $productDescription = '',
         $merchantDescription = '',
@@ -136,7 +136,7 @@ class ApiRest
                 'trxType'               => (string) $trxType,
                 'scaException'          => (string) $scaException,
                 'urlOk'                 => (string) $urlOk,
-                'ulrKo'                 => (string) $ulrKo,
+                'urlKo'                 => (string) $urlKo,
                 'merchantData'          => (array) $merchantData
             ]
         ];
@@ -156,7 +156,7 @@ class ApiRest
         $idUser = '',
         $tokenUser= '',
         $urlOk = '',
-        $ulrKo = '',
+        $urlKo = '',
         $scoring = '0',
         $productDescription = '',
         $merchantDescription = '',
@@ -186,7 +186,7 @@ class ApiRest
                 'trxType'               => (string) $trxType,
                 'scaException'          => (string) $scaException,
                 'urlOk'                 => (string) $urlOk,
-                'ulrKo'                 => (string) $ulrKo,
+                'urlKo'                 => (string) $urlKo,
                 'merchantData'          => (array) $merchantData,
                 'deferred'              => (int) $deferred
             ]
