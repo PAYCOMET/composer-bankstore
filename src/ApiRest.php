@@ -114,7 +114,7 @@ class ApiRest
         $userInteraction = 1,
         $escrowTargets = [],
         $trxType = '',
-        $SCAException = '',
+        $scaException = '',
         $merchantData = []
     ) {
         $params = [
@@ -134,7 +134,7 @@ class ApiRest
                 'userInteraction'       => (int) $userInteraction,
                 'escrowTargets'         => (array) $escrowTargets,
                 'trxType'               => (string) $trxType,
-                'SCAException'          => (string) $SCAException,
+                'scaException'          => (string) $scaException,
                 'urlOk'                 => (string) $urlOk,
                 'ulrKo'                 => (string) $ulrKo,
                 'merchantData'          => (array) $merchantData
@@ -163,7 +163,7 @@ class ApiRest
         $userInteraction = 1,
         $escrowTargets = [],
         $trxType = '',
-        $SCAException = '',
+        $scaException = '',
         $merchantData = [],
         $deferred = 0
     ) {
@@ -184,7 +184,7 @@ class ApiRest
                 'userInteraction'       => (int) $userInteraction,
                 'escrowTargets'         => (array) $escrowTargets,
                 'trxType'               => (string) $trxType,
-                'SCAException'          => (string) $SCAException,
+                'scaException'          => (string) $scaException,
                 'urlOk'                 => (string) $urlOk,
                 'ulrKo'                 => (string) $ulrKo,
                 'merchantData'          => (array) $merchantData,
@@ -238,7 +238,7 @@ class ApiRest
         $userInteraction = '',
         $escrowTargets = [],
         $trxType = '',
-        $SCAException = '',
+        $scaException = '',
         $merchantData = []
     ) {
         $params = [
@@ -263,7 +263,7 @@ class ApiRest
                 "userInteraction"       => (int) $userInteraction,
                 "escrowTargets"         => (array)  $escrowTargets,
                 "trxType"               => (string) $trxType,
-                "SCAException"          => (string) $SCAException,
+                "scaException"          => (string) $scaException,
                 "urlOk"                 => (string) $urlOk,
                 "urlKo"                 => (string) $urlKo,
                 "merchantData"          => (array) $merchantData,
