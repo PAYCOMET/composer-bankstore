@@ -76,7 +76,7 @@ class ApiRest
         $params = [
             'idUser'                => (int) $idUser,
             'tokenUser'             => (string) $tokenUser,
-            'terminal'              => (string) $terminal,
+            'terminal'              => (int) $terminal,
         ];
 
         return $this->executeRequest('/v1/cards/info', $params);
@@ -88,7 +88,7 @@ class ApiRest
         $tokenUser
     ) {
         $params = [
-            'terminal'              => (string) $terminal,
+            'terminal'              => (int) $terminal,
             'idUser'                => (int) $idUser,
             'tokenUser'             => (string) $tokenUser,
         ];
@@ -105,7 +105,7 @@ class ApiRest
         $originalIp,
         $secure,
         $idUser = '',
-        $tokenUser= '',
+        $tokenUser = '',
         $urlOk = '',
         $urlKo = '',
         $scoring = '0',
@@ -115,7 +115,8 @@ class ApiRest
         $escrowTargets = [],
         $trxType = '',
         $scaException = '',
-        $merchantData = []
+        $merchantData = [],
+        $notifyDirectPayment = 1
     ) {
         $params = [
             "payment" => [
@@ -137,6 +138,7 @@ class ApiRest
                 'scaException'          => (string) $scaException,
                 'urlOk'                 => (string) $urlOk,
                 'urlKo'                 => (string) $urlKo,
+                'notifyDirectPayment'   => (int) $notifyDirectPayment,
                 'merchantData'          => (array) $merchantData
             ]
         ];
@@ -266,7 +268,7 @@ class ApiRest
                 "scaException"          => (string) $scaException,
                 "urlOk"                 => (string) $urlOk,
                 "urlKo"                 => (string) $urlKo,
-                "merchantData"          => (array) $merchantData,
+                "merchantData"          => (array) $merchantData
             ]
 
         ];
@@ -276,20 +278,18 @@ class ApiRest
 
     public function removeSubscription(
         $terminal,
-        $order,
         $idUser,
         $tokenUser
     ) {
         $params = [
             "payment" => [
-                'terminal'  => (int) $terminal,
-                'order'     => (string) $order,
-                'idUser'    => (int) $idUser,
-                'tokenUser' => (string) $tokenUser
+                'terminal'      => (int) $terminal,
+                'idUser'        => (int) $idUser,
+                'tokenUser'     => (string) $tokenUser
             ]
         ];
 
-        return $this->executeRequest('/v1/subscription/' . $order . '/remove', $params);
+        return $this->executeRequest('/v1/subscription/remove', $params);
     }
 
     public function executeRefund(
@@ -298,17 +298,17 @@ class ApiRest
         $amount,
         $currency,
         $authCode,
-        $originalIp
+        $originalIp,
+        $notifyDirectPayment = 1
     ) {
         $params = [
             "payment" => [
-                'terminal'      => (int) $terminal,
-                'amount'        => (string) $amount,
-                'currency'      => (string) $currency,
-                'authCode'      => (string) $authCode,
-                'originalIp'    => (string) $originalIp,
-                'tokenUser'     => (string) $tokenUser = '',
-                'idUser'        => (int) $idUser = ''
+                'terminal'              => (int) $terminal,
+                'amount'                => (string) $amount,
+                'currency'              => (string) $currency,
+                'authCode'              => (string) $authCode,
+                'originalIp'            => (string) $originalIp,
+                'notifyDirectPayment'   => (int) $notifyDirectPayment
             ]
         ];
 
@@ -326,8 +326,8 @@ class ApiRest
         curl_setopt_array($curl, array(
                 CURLOPT_URL                 => $url,
                 CURLOPT_RETURNTRANSFER      => true,
-                CURLOPT_MAXREDIRS           => 10,
-                CURLOPT_TIMEOUT             => 0,
+                CURLOPT_MAXREDIRS           => 3,
+                CURLOPT_TIMEOUT             => 120,
                 CURLOPT_FOLLOWLOCATION      => true,
                 CURLOPT_HTTP_VERSION        => CURL_HTTP_VERSION_1_1,
                 CURLOPT_CUSTOMREQUEST       => "POST",
