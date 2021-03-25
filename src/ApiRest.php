@@ -219,6 +219,30 @@ class ApiRest
         return $this->executeRequest('/v1/payments/' . $order . '/preauth/confirm', $params);
     }
 
+
+    public function cancelPreautorization(
+        $order,
+        $terminal,
+        $amount,
+        $originalIp,
+        $authCode,
+        $deferred = 0,
+        $notifyDirectPayment = 1
+    ) {
+        $params = [
+            "payment" => [
+                'terminal'              => (int) $terminal,
+                'amount'                => (string) $amount,
+                'originalIp'            => (string) $originalIp,
+                'authCode'              => (string) $authCode,
+                'deferred'              => (int) $deferred,
+                'notifyDirectPayment'   => (int) $notifyDirectPayment
+            ]
+        ];
+        
+        return $this->executeRequest('/v1/payments/' . $order . '/preauth/cancel', $params);
+    }
+
     public function createSubscription(
         $startDate,
         $endDate,
