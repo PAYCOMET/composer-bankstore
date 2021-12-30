@@ -339,7 +339,7 @@ class ApiRest
         return $this->executeRequest('/v1/payments/' . $order . '/refund', $params);
     }
 
-    private function executeRequest($endpoint, $params)
+    protected function executeRequest($endpoint, $params)
     {
         $jsonParams = json_encode($params);
 
