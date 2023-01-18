@@ -5,6 +5,9 @@ namespace Paycomet\Bankstore;
 use SoapClient;
 use SoapFault;
 use stdClass;
+use function filter_var;
+use const FILTER_FLAG_IPV4;
+use const FILTER_VALIDATE_IP;
 
 /**
  * API de PAYCOMET para PHP. Métodos BankStore IFRAME/FULLSCREEN/XML/JET
@@ -1736,7 +1739,7 @@ class Client
      * @return string Debe de ser la ip del cliente. En su defecto, devuelve la ip del servidor.
      * @version 1.3.0 2019-09-22
      */
-    public function GetClientIp()
+  public function GetClientIp()
     {
         $ipAddress = '';
         if (isset($_SERVER['REMOTE_ADDR'])) {
@@ -1753,6 +1756,9 @@ class Client
             $ipAddress = $_SERVER['HTTP_CLIENT_IP'];
         } else {
             $ipAddress = $_SERVER['SERVER_ADDR'];  // Server IP por defecto
+        }
+        if(!filter_var($ipAddress, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            $ipAddress = "XXX.XXX.XXX.XXX";  // Server IP por defecto
         }
         return $ipAddress;
     }
