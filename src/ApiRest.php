@@ -339,6 +339,42 @@ class ApiRest
         return $this->executeRequest('/v1/payments/' . $order . '/refund', $params);
     }
 
+    public function applePayButton(
+        $operationType,
+        $language = 'ES',
+        $terminal = '',        
+        $payment = [],
+        $subscription = []
+    ) {
+        $params = [
+            "operationType"         => (int) $operationType,
+            "language"              => (string) $language,
+            "terminal"              => (int) $terminal,            
+            "payment"               => (array) $payment,
+            "subscription"          => (array) $subscription
+        ];
+
+        return $this->executeRequest('/v1/payments/applepaybutton', $params);
+    }
+
+    public function applePayButtonInfo(
+        $operationType,
+        $language = 'ES',
+        $terminal = '',        
+        $payment = [],
+        $subscription = []
+    ) {
+        $params = [
+            "operationType"         => (int) $operationType,
+            "language"              => (string) $language,
+            "terminal"              => (int) $terminal,            
+            "payment"               => (array) $payment,
+            "subscription"          => (array) $subscription
+        ];
+
+        return $this->executeRequest('/v1/payments/applepaybuttoninfo', $params);
+    }
+
     private function executeRequest($endpoint, $params)
     {
         $jsonParams = json_encode($params);
@@ -368,4 +404,5 @@ class ApiRest
 
         return json_decode($response);
     }
+    
 }
