@@ -377,7 +377,7 @@ class ApiRest
 
     private function executeRequest($endpoint, $params)
     {
-        $jsonParams = json_encode($params);
+        $jsonParams = json_encode($params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $curl = curl_init();
 
