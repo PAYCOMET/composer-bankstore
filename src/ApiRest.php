@@ -68,6 +68,26 @@ class ApiRest
         return $this->executeRequest('/v1/cards', $params);
     }
 
+    public function addUserCard(
+        $terminal,
+        $pan,
+        $expiryMonth,
+        $expiryYear = '',
+        $cvc2 = 'ES',
+        $notify = 1
+    ) {
+        $params = [
+            "terminal"              => (int) $terminal,
+            "pan"                   => (string) $pan,
+            "expiryMonth"           => (string) $expiryMonth,
+            "expiryYear"            => (string) $expiryYear,
+            "cvc2"                  => (string) $cvc2,
+            "notify"                => (int) $notify
+        ];
+
+        return $this->executeRequest('/v1/cards', $params);
+    }
+
     public function infoUser(
         $idUser,
         $tokenUser,
