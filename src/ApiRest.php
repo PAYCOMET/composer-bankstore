@@ -11,7 +11,7 @@
  * bundled with this package in the LICENSE file.
  *
  * @package    PAYCOMET
- * @copyright  (c) 2020, PAYCOMET
+ * @copyright  (c) 2026, PAYCOMET
  * @link       https://www.paycomet.com
  */
 
@@ -19,11 +19,11 @@ namespace Paycomet\Bankstore;
 
 class ApiRest
 {
-    private $apiKey;
+    private string $apiKey;
+    private string $endpointUrl = "https://rest.paycomet.com";
+    private int $timeout = 60;
 
-    private $endpointUrl = "https://rest.paycomet.com";
-
-    public function __construct($apiKey)
+    public function __construct(string $apiKey)
     {
         $this->apiKey = $apiKey;
     }
@@ -400,28 +400,24 @@ class ApiRest
         $jsonParams = json_encode($params, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
 
         $curl = curl_init();
-
         $url = $this->endpointUrl . $endpoint;
 
-        curl_setopt_array($curl, array(
+        curl_setopt_array($curl, [
                 CURLOPT_URL                 => $url,
                 CURLOPT_RETURNTRANSFER      => true,
                 CURLOPT_MAXREDIRS           => 3,
-                CURLOPT_TIMEOUT             => 120,
+                CURLOPT_TIMEOUT             => $this->timeout,
                 CURLOPT_FOLLOWLOCATION      => true,
-                CURLOPT_HTTP_VERSION        => CURL_HTTP_VERSION_1_1,
-                CURLOPT_CUSTOMREQUEST       => "POST",
+                CURLOPT_POST                => true,
                 CURLOPT_POSTFIELDS          => $jsonParams,
-                CURLOPT_HTTPHEADER          => array(
-                    "PAYCOMET-API-TOKEN: $this->apiKey",
+                CURLOPT_HTTPHEADER          => [
+                    "PAYCOMET-API-TOKEN: " . $this->apiKey,
                     "Content-Type: application/json"
-                ),
-        ));
+                ],
+        ]);
 
         $response = curl_exec($curl);
-
         curl_close($curl);
-
         return json_decode($response);
     }
     
