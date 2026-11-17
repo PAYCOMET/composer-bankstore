@@ -417,7 +417,9 @@ class ApiRest
         ]);
 
         $response = curl_exec($curl);
-        curl_close($curl);
+        if (PHP_VERSION_ID < 80000) {
+            curl_close($curl);
+        }
         return json_decode($response);
     }
     
